@@ -80,6 +80,8 @@ public class BeerControllerTest {
 
 		mockMvc.perform(post("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson))
+				.andExpect(header().string("Location", "/api/v1/beer/" + savedDto.getId()
+						.toString()))
 				.andExpect(status().isCreated());
 
 	}
