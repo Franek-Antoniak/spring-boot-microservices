@@ -53,7 +53,7 @@ class BeerControllerTest {
 
 		// then
 		mockMvc.perform(get("/api/v1/beer/" + validBeer.getId()
-						.toString()))
+						.toString()).accept(APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 
