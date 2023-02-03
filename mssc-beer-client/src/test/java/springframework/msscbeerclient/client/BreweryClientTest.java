@@ -3,8 +3,9 @@ package springframework.msscbeerclient.client;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import springframework.msscbeerclient.model.BeerDto;
-import springframework.msscbeerclient.model.CustomerDto;
+import springframework.msscbeerclient.web.client.BreweryClient;
+import springframework.msscbeerclient.web.model.BeerDto;
+import springframework.msscbeerclient.web.model.CustomerDto;
 
 import java.net.URI;
 import java.util.UUID;
@@ -13,8 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BreweryClientTest {
-	@Autowired
-	BreweryClient breweryClient;
+	@Autowired BreweryClient breweryClient;
 
 	@Test
 	void getBeerById() {

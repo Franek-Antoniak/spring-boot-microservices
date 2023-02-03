@@ -1,10 +1,10 @@
-package springframework.msscbeerclient.client;
+package springframework.msscbeerclient.web.client;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import springframework.msscbeerclient.model.BeerDto;
-import springframework.msscbeerclient.model.CustomerDto;
+import springframework.msscbeerclient.web.model.BeerDto;
+import springframework.msscbeerclient.web.model.CustomerDto;
 
 import java.net.URI;
 import java.util.UUID;

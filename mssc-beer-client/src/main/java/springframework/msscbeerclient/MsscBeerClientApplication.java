@@ -9,5 +9,4 @@ public class MsscBeerClientApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsscBeerClientApplication.class, args);
 	}
-
 }

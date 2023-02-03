@@ -1,4 +1,4 @@
-package springframework.msscbeerclient.client;
+package springframework.msscbeerclient.web.client;
 
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
