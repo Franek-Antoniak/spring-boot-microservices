@@ -116,4 +116,19 @@ public class BeerControllerTest {
 		then(beerService).should()
 				.deleteById(any());
 	}
+
+	@Test
+	public void violationError() throws Exception {
+		//given
+		BeerDto beerDto = validBeer;
+
+		//when
+
+		//then
+		mockMvc.perform(post("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(beerDto)))
+				.andExpect(status().isBadRequest());
+
+		then(beerService).shouldHaveNoInteractions();
+	}
 }
