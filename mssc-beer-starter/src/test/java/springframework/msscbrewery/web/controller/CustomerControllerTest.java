@@ -110,4 +110,18 @@ class CustomerControllerTest {
 		then(customerService).should()
 				.deleteById(any());
 	}
+
+	@Test
+	void handleValidationException() throws Exception {
+		// given
+		validCustomer.setName(null);
+		validCustomer.setId(UUID.randomUUID());
+
+		// when
+
+		// then
+		mockMvc.perform(post("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(validCustomer)))
+				.andExpect(status().isBadRequest());
+	}
 }
