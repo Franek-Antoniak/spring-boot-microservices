@@ -35,11 +35,18 @@ public class BeerControllerTest {
 	@Autowired
 	ObjectMapper objectMapper;
 	BeerDto validBeer;
+	BeerDto beerDto;
 
 	@BeforeEach
 	public void setUp() {
 		validBeer = BeerDto.builder()
 				.id(UUID.randomUUID())
+				.beerName("Beer1")
+				.beerStyle("PALE_ALE")
+				.upc(123456789012L)
+				.build();
+		beerDto = BeerDto.builder()
+				.id(null)
 				.beerName("Beer1")
 				.beerStyle("PALE_ALE")
 				.upc(123456789012L)
@@ -65,24 +72,16 @@ public class BeerControllerTest {
 	@Test
 	public void handlePost() throws Exception {
 		//given
-		BeerDto beerDto = validBeer;
-		beerDto.setId(null);
-		BeerDto savedDto = BeerDto.builder()
-				.id(UUID.randomUUID())
-				.beerName("New Beer")
-				.build();
-		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
-		given(beerService.saveNewBeer(any())).willReturn(savedDto);
+		given(beerService.saveNewBeer(any())).willReturn(validBeer);
 
 		//when
 
 		//then
 
 		mockMvc.perform(post("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON)
-						.content(beerDtoJson))
-				.andExpect(header().string("Location", "/api/v1/beer/" + savedDto.getId()
-						.toString()))
+						.content(objectMapper.writeValueAsString(beerDto)))
+				.andExpect(header().string("Location", "/api/v1/beer/" + validBeer.getId()))
 				.andExpect(status().isCreated());
 
 	}
@@ -90,13 +89,10 @@ public class BeerControllerTest {
 	@Test
 	public void handleUpdate() throws Exception {
 		//given
-		BeerDto beerDto = validBeer;
-		beerDto.setId(null);
-		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
 		//when
 		mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON)
-						.content(beerDtoJson))
+						.content(objectMapper.writeValueAsString(beerDto)))
 				.andExpect(status().isNoContent());
 
 		//then
@@ -120,7 +116,8 @@ public class BeerControllerTest {
 	@Test
 	public void violationError() throws Exception {
 		//given
-		BeerDto beerDto = validBeer;
+		beerDto.setBeerName("");
+		beerDto.setId(UUID.randomUUID());
 
 		//when
 

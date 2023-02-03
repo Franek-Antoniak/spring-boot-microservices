@@ -27,17 +27,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 class CustomerControllerTest {
 
-	@MockBean CustomerService customerService;
+	@MockBean
+	CustomerService customerService;
 
-	@Autowired MockMvc mockMvc;
+	@Autowired
+	MockMvc mockMvc;
 
-	@Autowired ObjectMapper objectMapper;
+	@Autowired
+	ObjectMapper objectMapper;
 	CustomerDto validCustomer;
+	CustomerDto customerDto;
 
 	@BeforeEach
 	public void setUp() {
 		validCustomer = CustomerDto.builder()
 				.id(UUID.randomUUID())
+				.name("Customer1")
+				.build();
+		customerDto = CustomerDto.builder()
+				.id(null)
 				.name("Customer1")
 				.build();
 	}
@@ -50,8 +58,7 @@ class CustomerControllerTest {
 		when(customerService.getCustomerById(any(UUID.class))).thenReturn(validCustomer);
 
 		// then
-		mockMvc.perform(get("/api/v1/customer/" + validCustomer.getId()
-						.toString()).accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/api/v1/customer/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id", is(validCustomer.getId()
@@ -71,7 +78,7 @@ class CustomerControllerTest {
 
 		// then
 		mockMvc.perform(post("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(validCustomer)))
+						.content(objectMapper.writeValueAsString(customerDto)))
 				.andExpect(status().isCreated())
 				.andExpect(header().string("Location", "/api/v1/customer/" + validCustomer.getId()
 						.toString()));
@@ -87,9 +94,8 @@ class CustomerControllerTest {
 		// when
 
 		// then
-		mockMvc.perform(put("/api/v1/customer/" + validCustomer.getId()
-						.toString()).contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(validCustomer)))
+		mockMvc.perform(put("/api/v1/customer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(customerDto)))
 				.andExpect(status().isNoContent());
 
 		then(customerService).should()
@@ -103,8 +109,7 @@ class CustomerControllerTest {
 		// when
 
 		// then
-		mockMvc.perform(delete("/api/v1/customer/" + validCustomer.getId()
-						.toString()))
+		mockMvc.perform(delete("/api/v1/customer/" + UUID.randomUUID()))
 				.andExpect(status().isNoContent());
 
 		then(customerService).should()
@@ -114,14 +119,14 @@ class CustomerControllerTest {
 	@Test
 	void handleValidationException() throws Exception {
 		// given
-		validCustomer.setName(null);
-		validCustomer.setId(UUID.randomUUID());
+		customerDto.setName(null);
+		customerDto.setId(UUID.randomUUID());
 
 		// when
 
 		// then
 		mockMvc.perform(post("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(validCustomer)))
+						.content(objectMapper.writeValueAsString(customerDto)))
 				.andExpect(status().isBadRequest());
 	}
 }
