@@ -23,11 +23,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(BeerController.class)
 @ExtendWith(MockitoExtension.class)
 class BeerControllerTest {
-	@Autowired MockMvc mockMvc;
+	@Autowired
+	MockMvc mockMvc;
 
-	@Autowired ObjectMapper objectMapper;
+	@Autowired
+	ObjectMapper objectMapper;
 
 	BeerDto validBeer;
+	BeerDto beerDto;
 
 	@BeforeEach
 	void setUp() {
@@ -43,6 +46,14 @@ class BeerControllerTest {
 				.createdDate(OffsetDateTime.now())
 				.lastModifiedDate(OffsetDateTime.now())
 				.build();
+		beerDto = BeerDto.builder()
+				.beerName("My Beer")
+				.beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
+				.upc(123123123123L)
+				.quantityOnHand(200)
+				.price(BigDecimal.valueOf(12.99))
+				.currency(Currency.getInstance("USD"))
+				.build();
 	}
 
 	@Test
@@ -52,8 +63,7 @@ class BeerControllerTest {
 		// when
 
 		// then
-		mockMvc.perform(get("/api/v1/beer/" + validBeer.getId()
-						.toString()).accept(APPLICATION_JSON))
+		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID()).accept(APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 
@@ -65,7 +75,7 @@ class BeerControllerTest {
 
 		// then
 		mockMvc.perform(post("/api/v1/beer/").contentType(APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(validBeer)))
+						.content(objectMapper.writeValueAsString(beerDto)))
 				.andExpect(status().isCreated());
 	}
 
@@ -76,9 +86,21 @@ class BeerControllerTest {
 		// when
 
 		// then
-		mockMvc.perform(put("/api/v1/beer/" + validBeer.getId()
-						.toString()).contentType(APPLICATION_JSON)
-						.content(objectMapper.writeValueAsString(validBeer)))
+		mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID()).contentType(APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(beerDto)))
 				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	void handlePostWithException() throws Exception {
+		// given
+		beerDto.setId(UUID.randomUUID());
+
+		// when
+
+		// then
+		mockMvc.perform(post("/api/v1/beer/").contentType(APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(beerDto)))
+				.andExpect(status().isBadRequest());
 	}
 }

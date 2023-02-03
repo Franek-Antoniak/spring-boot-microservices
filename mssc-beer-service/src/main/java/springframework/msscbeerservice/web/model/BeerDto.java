@@ -42,7 +42,6 @@ public class BeerDto {
 	@NotNull
 	private BigDecimal price;
 	@NotNull
-	@org.hibernate.validator.constraints.Currency({"USD"})
 	private Currency currency;
 
 	@NotNull
