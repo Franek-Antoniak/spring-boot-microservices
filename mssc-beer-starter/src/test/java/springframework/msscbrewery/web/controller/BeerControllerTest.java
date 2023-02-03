@@ -26,11 +26,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(BeerController.class)
 public class BeerControllerTest {
 
-	@MockBean BeerService beerService;
+	@MockBean
+	BeerService beerService;
 
-	@Autowired MockMvc mockMvc;
+	@Autowired
+	MockMvc mockMvc;
 
-	@Autowired ObjectMapper objectMapper;
+	@Autowired
+	ObjectMapper objectMapper;
 	BeerDto validBeer;
 
 	@BeforeEach
@@ -51,8 +54,7 @@ public class BeerControllerTest {
 		// when
 
 		// then
-		mockMvc.perform(get("/api/v1/beer/" + validBeer.getId()
-						.toString()).accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id", is(validBeer.getId()
@@ -89,10 +91,11 @@ public class BeerControllerTest {
 	public void handleUpdate() throws Exception {
 		//given
 		BeerDto beerDto = validBeer;
+		beerDto.setId(null);
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
 		//when
-		mockMvc.perform(put("/api/v1/beer/" + validBeer.getId()).contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson))
 				.andExpect(status().isNoContent());
 
@@ -106,7 +109,7 @@ public class BeerControllerTest {
 		//given
 
 		//when
-		mockMvc.perform(delete("/api/v1/beer/" + validBeer.getId()))
+		mockMvc.perform(delete("/api/v1/beer/" + UUID.randomUUID()))
 				.andExpect(status().isNoContent());
 
 		//then
