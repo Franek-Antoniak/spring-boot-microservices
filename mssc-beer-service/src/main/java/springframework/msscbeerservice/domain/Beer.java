@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.Currency;
 import java.util.UUID;
 
@@ -39,9 +39,9 @@ public class Beer {
 
 	@CreationTimestamp
 	@Column(updatable = false)
-	private Timestamp createdDate;
+	private OffsetDateTime createdDate;
 	@UpdateTimestamp
-	private Timestamp lastModifiedDate;
+	private OffsetDateTime lastModifiedDate;
 	private String beerName;
 	private BeerStyleEnum beerStyle;
 	@Column(unique = true)
