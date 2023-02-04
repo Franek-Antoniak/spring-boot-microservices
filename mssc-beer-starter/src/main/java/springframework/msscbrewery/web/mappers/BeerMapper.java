@@ -5,7 +5,7 @@ import org.mapstruct.factory.Mappers;
 import springframework.msscbrewery.web.domain.Beer;
 import springframework.msscbrewery.web.model.BeerDto;
 
-@Mapper
+@Mapper(uses = {DateMapper.class})
 public abstract class BeerMapper {
 	public static final BeerMapper INSTANCE = Mappers.getMapper(BeerMapper.class);
 
