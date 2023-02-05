@@ -43,13 +43,13 @@ public class BeerControllerTest {
 				.id(UUID.randomUUID())
 				.beerName("Beer1")
 				.beerStyle("PALE_ALE")
-				.upc("123456789012L")
+				.upc(123456789012L)
 				.build();
 		beerDto = BeerDto.builder()
 				.id(null)
 				.beerName("Beer1")
 				.beerStyle("PALE_ALE")
-				.upc("123456789012L")
+				.upc(123456789012L)
 				.build();
 	}
 

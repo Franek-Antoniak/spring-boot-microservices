@@ -44,7 +44,7 @@ class BeerControllerTest {
 		beerDto = BeerDto.builder()
 				.beerName("My Beer")
 				.beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
-				.upc(123123123123L)
+				.upc("123123123123L")
 				.quantityOnHand(200)
 				.price(BigDecimal.valueOf(12.99))
 				.currency(Currency.getInstance("USD"))
