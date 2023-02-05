@@ -2,19 +2,25 @@ package springframework.msscbeerservice.web.mappers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
 import springframework.msscbeerservice.domain.Beer;
 import springframework.msscbeerservice.web.model.BeerDto;
 import springframework.msscbeerservice.web.model.BeerStyleEnum;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Currency;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+@SpringBootTest
 class BeerMapperTest {
-	BeerMapper beerMapper = BeerMapper.INSTANCE;
+	@Autowired
+	@Qualifier("delegate")
+	BeerMapper beerMapper;
 
 	BeerDto beerDto;
 	Beer beer;
@@ -22,16 +28,15 @@ class BeerMapperTest {
 	@BeforeEach
 	void setUp() {
 		beerDto = BeerDto.builder()
-				.id(UUID.randomUUID())
-				.beerName("Beer1")
-				.beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
+		                 .id(UUID.randomUUID())
+		                 .beerName("Beer1")
+		                 .beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
 				.upc("123123123123L")
 				.price(BigDecimal.valueOf(12.99))
 				.quantityOnHand(200)
 				.createdDate(OffsetDateTime.now())
 				.lastModifiedDate(OffsetDateTime.now())
 				.version(1)
-				.currency(Currency.getInstance("USD"))
 				.build();
 
 		beer = Beer.builder()
@@ -44,7 +49,6 @@ class BeerMapperTest {
 				.createdDate(beerDto.getCreatedDate())
 				.lastModifiedDate(beerDto.getLastModifiedDate())
 				.version(1)
-				.currency(Currency.getInstance("USD"))
 				.build();
 	}
 
@@ -60,8 +64,6 @@ class BeerMapperTest {
 		assertEquals(expected.getCreatedDate(), beerDto.getCreatedDate());
 		assertEquals(expected.getLastModifiedDate(), beerDto.getLastModifiedDate());
 		assertEquals(expected.getVersion(), beerDto.getVersion());
-		assertEquals(expected.getCurrency(), beerDto.getCurrency());
-		assertEquals(expected.getQuantityOnHand(), beerDto.getQuantityOnHand());
 	}
 
 	@Test
@@ -76,14 +78,11 @@ class BeerMapperTest {
 		assertEquals(expected.getCreatedDate(), beer.getCreatedDate());
 		assertEquals(expected.getLastModifiedDate(), beer.getLastModifiedDate());
 		assertEquals(expected.getVersion(), beer.getVersion());
-		assertEquals(expected.getCurrency(), beer.getCurrency());
-		assertEquals(expected.getQuantityToBrew(), beer.getQuantityToBrew());
 	}
 
 	@Test
 	void updateBeerFromDto() {
 		beerDto.setQuantityOnHand(beerDto.getQuantityOnHand() + 100);
-		beer.setQuantityToBrew(beer.getQuantityToBrew() + 100);
 		beerDto.setLastModifiedDate(beerDto.getLastModifiedDate()
 				.plusDays(1));
 		Beer expected = beerMapper.updateBeerFromDto(beerDto, beer);
@@ -96,8 +95,6 @@ class BeerMapperTest {
 		assertEquals(expected.getCreatedDate(), beer.getCreatedDate());
 		assertEquals(expected.getLastModifiedDate(), beerDto.getLastModifiedDate());
 		assertEquals(expected.getVersion(), beerDto.getVersion());
-		assertEquals(expected.getCurrency(), beerDto.getCurrency());
-		assertEquals(expected.getQuantityToBrew(), beerDto.getQuantityOnHand());
 	}
 
 }

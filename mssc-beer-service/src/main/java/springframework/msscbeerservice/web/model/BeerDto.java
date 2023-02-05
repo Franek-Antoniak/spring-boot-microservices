@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Currency;
 import java.util.UUID;
 
 @Data
@@ -44,8 +43,9 @@ public class BeerDto {
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING)
 	private BigDecimal price;
-	@NotNull
-	private Currency currency;
+
+	//	@NotNull
+	//	private Currency currency;
 
 	@NotNull
 	@PositiveOrZero

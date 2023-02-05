@@ -14,7 +14,6 @@ import springframework.msscbeerservice.web.model.BeerDto;
 import springframework.msscbeerservice.web.model.BeerStyleEnum;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -47,7 +46,6 @@ class BeerControllerTest {
 				.upc("123123123123L")
 				.quantityOnHand(200)
 				.price(BigDecimal.valueOf(12.99))
-				.currency(Currency.getInstance("USD"))
 				.build();
 	}
 

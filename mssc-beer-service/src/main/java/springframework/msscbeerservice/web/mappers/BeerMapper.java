@@ -1,22 +1,27 @@
 package springframework.msscbeerservice.web.mappers;
 
+import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
 import springframework.msscbeerservice.domain.Beer;
 import springframework.msscbeerservice.web.model.BeerDto;
 
 @Mapper
+@DecoratedWith(BeerMapperDecorator.class)
 public abstract class BeerMapper {
-	public static final BeerMapper INSTANCE = Mappers.getMapper(BeerMapper.class);
 
 	@Mapping(
 			target = "quantityOnHand",
-			source = "quantityToBrew"
+			ignore = true
 	)
 	public abstract BeerDto beerToBeerDto(Beer beer);
 
+
+	@Mapping(
+			target = "minOnHand",
+			ignore = true
+	)
 	@Mapping(
 			target = "quantityToBrew",
 			source = "quantityOnHand"
@@ -24,8 +29,13 @@ public abstract class BeerMapper {
 	public abstract Beer beerDtoToBeer(BeerDto beerDto);
 
 	@Mapping(
-			target = "quantityToBrew",
-			source = "quantityOnHand"
+			target = "minOnHand",
+			ignore = true
 	)
-	public abstract Beer updateBeerFromDto(BeerDto beerDto, @MappingTarget Beer beer);
+	@Mapping(
+			target = "quantityToBrew",
+			ignore = true
+	)
+	public abstract Beer updateBeerFromDto(BeerDto beerDto,
+			@MappingTarget Beer beer);
 }

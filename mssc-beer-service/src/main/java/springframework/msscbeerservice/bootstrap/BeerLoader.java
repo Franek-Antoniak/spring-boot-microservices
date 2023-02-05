@@ -1,17 +1,7 @@
 package springframework.msscbeerservice.bootstrap;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-import springframework.msscbeerservice.domain.Beer;
-import springframework.msscbeerservice.repository.BeerRepository;
-import springframework.msscbeerservice.web.model.BeerStyleEnum;
-
-import java.math.BigDecimal;
-import java.util.Currency;
-
-@Component
-@RequiredArgsConstructor
+// @Component
+/*@RequiredArgsConstructor
 public class BeerLoader implements CommandLineRunner {
 	private final BeerRepository beerRepository;
 
@@ -42,4 +32,4 @@ public class BeerLoader implements CommandLineRunner {
 					.build());
 		}
 	}
-}
+}*/

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import springframework.msscbeerinventory.domain.BeerInventory;
 import springframework.msscbeerinventory.repositories.BeerInventoryRepository;
 
@@ -30,25 +29,24 @@ public class BeerInventoryBootstrap implements CommandLineRunner {
 		}
 	}
 
-	@Transactional
 	public void loadInitialInv() {
 		beerInventoryRepository.save(BeerInventory.builder()
-				.beerId(BEER_1_UUID)
-				.upc(BEER_1_UPC)
-				.quantityOnHand(50)
-				.build());
+		                                          .beerId(BEER_1_UUID)
+		                                          .upc(BEER_1_UPC)
+		                                          .quantityOnHand(50)
+		                                          .build());
 
 		beerInventoryRepository.save(BeerInventory.builder()
-				.beerId(BEER_2_UUID)
-				.upc(BEER_2_UPC)
-				.quantityOnHand(50)
-				.build());
+		                                          .beerId(BEER_2_UUID)
+		                                          .upc(BEER_2_UPC)
+		                                          .quantityOnHand(50)
+		                                          .build());
 
-		beerInventoryRepository.save(BeerInventory.builder()
-				.beerId(BEER_3_UUID)
-				.upc(BEER_3_UPC)
-				.quantityOnHand(50)
-				.build());
+		beerInventoryRepository.saveAndFlush(BeerInventory.builder()
+		                                                  .beerId(BEER_3_UUID)
+		                                                  .upc(BEER_3_UPC)
+		                                                  .quantityOnHand(50)
+		                                                  .build());
 
 		log.debug("Loaded Inventory. Record count: " + beerInventoryRepository.count());
 	}

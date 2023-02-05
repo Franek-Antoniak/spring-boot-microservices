@@ -1,5 +1,6 @@
 package springframework.msscbeerservice.web.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,13 +17,18 @@ public class MvcExceptionHandler {
 	public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
 		Map<String, String> errors = new HashMap<>();
 		ex.getBindingResult()
-				.getAllErrors()
-				.forEach((error) -> {
-					String fieldName = ((FieldError) error).getField();
-					String errorMessage = error.getDefaultMessage();
-					errors.put(fieldName, errorMessage);
-				});
+		  .getAllErrors()
+		  .forEach((error) -> {
+			  String fieldName = ((FieldError) error).getField();
+			  String errorMessage = error.getDefaultMessage();
+			  errors.put(fieldName, errorMessage);
+		  });
 		return ResponseEntity.badRequest()
-				.body(errors);
+		                     .body(errors);
+	}
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<Void> handleNotFound(NotFoundException e) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

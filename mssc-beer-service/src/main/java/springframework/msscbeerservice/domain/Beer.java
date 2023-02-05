@@ -3,16 +3,13 @@ package springframework.msscbeerservice.domain;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import springframework.msscbeerservice.web.model.BeerStyleEnum;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.Currency;
 import java.util.UUID;
 
 @Getter
@@ -24,6 +21,7 @@ import java.util.UUID;
 public class Beer {
 	@Id
 	@GeneratedValue(generator = "UUID")
+	@Type(type = "org.hibernate.type.UUIDCharType")
 	@GenericGenerator(
 			name = "UUID",
 			strategy = "org.hibernate.id.UUIDGenerator"
@@ -43,10 +41,12 @@ public class Beer {
 	@UpdateTimestamp
 	private OffsetDateTime lastModifiedDate;
 	private String beerName;
+	@Enumerated(EnumType.STRING)
 	private BeerStyleEnum beerStyle;
 	@Column(unique = true)
 	private String upc;
 	private BigDecimal price;
-	private Currency currency;
+	//	private Currency currency;
 	private Integer quantityToBrew;
+	private Integer minOnHand;
 }

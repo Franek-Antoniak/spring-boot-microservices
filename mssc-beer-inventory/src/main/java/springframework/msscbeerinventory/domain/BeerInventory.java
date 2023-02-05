@@ -2,6 +2,7 @@ package springframework.msscbeerinventory.domain;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Entity
 @SuperBuilder
 public class BeerInventory extends BaseEntity {
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID beerId;
     private String upc;
     @Builder.Default
