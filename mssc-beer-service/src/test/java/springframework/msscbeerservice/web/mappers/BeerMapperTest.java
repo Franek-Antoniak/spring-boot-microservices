@@ -61,6 +61,7 @@ class BeerMapperTest {
 		assertEquals(expected.getLastModifiedDate(), beerDto.getLastModifiedDate());
 		assertEquals(expected.getVersion(), beerDto.getVersion());
 		assertEquals(expected.getCurrency(), beerDto.getCurrency());
+		assertEquals(expected.getQuantityOnHand(), beerDto.getQuantityOnHand());
 	}
 
 	@Test
@@ -76,5 +77,27 @@ class BeerMapperTest {
 		assertEquals(expected.getLastModifiedDate(), beer.getLastModifiedDate());
 		assertEquals(expected.getVersion(), beer.getVersion());
 		assertEquals(expected.getCurrency(), beer.getCurrency());
+		assertEquals(expected.getQuantityToBrew(), beer.getQuantityToBrew());
 	}
+
+	@Test
+	void updateBeerFromDto() {
+		beerDto.setQuantityOnHand(beerDto.getQuantityOnHand() + 100);
+		beer.setQuantityToBrew(beer.getQuantityToBrew() + 100);
+		beerDto.setLastModifiedDate(beerDto.getLastModifiedDate()
+				.plusDays(1));
+		Beer expected = beerMapper.updateBeerFromDto(beerDto, beer);
+
+		assertEquals(expected.getId(), beer.getId());
+		assertEquals(expected.getBeerName(), beerDto.getBeerName());
+		assertEquals(expected.getBeerStyle(), beerDto.getBeerStyle());
+		assertEquals(expected.getUpc(), beerDto.getUpc());
+		assertEquals(expected.getPrice(), beerDto.getPrice());
+		assertEquals(expected.getCreatedDate(), beer.getCreatedDate());
+		assertEquals(expected.getLastModifiedDate(), beerDto.getLastModifiedDate());
+		assertEquals(expected.getVersion(), beerDto.getVersion());
+		assertEquals(expected.getCurrency(), beerDto.getCurrency());
+		assertEquals(expected.getQuantityToBrew(), beerDto.getQuantityOnHand());
+	}
+
 }

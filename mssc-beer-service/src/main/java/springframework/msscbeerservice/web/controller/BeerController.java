@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springframework.msscbeerservice.services.BeerService;
 import springframework.msscbeerservice.web.model.BeerDto;
 
 import javax.validation.Valid;
@@ -13,25 +14,27 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 public class BeerController {
+	private final BeerService beerService;
 
 	@GetMapping("/{beerId}")
 	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
-		// TODO impl
-		return new ResponseEntity<>(BeerDto.builder()
-				.build(), HttpStatus.OK);
+		return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
-		// TODO impl
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ResponseEntity<BeerDto> saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
+		return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
 	}
 
 
 	@PutMapping("/{beerId}")
-	public ResponseEntity<Void> updateBeerById(@PathVariable("beerId") UUID beerId,
+	public ResponseEntity<BeerDto> updateBeerById(@PathVariable("beerId") UUID beerId,
 			@Valid @RequestBody BeerDto beerDto) {
-		// TODO impl
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
+	}
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<Void> handleNotFound(NotFoundException e) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
