@@ -9,25 +9,28 @@ import org.springframework.transaction.annotation.Transactional;
 import springframework.msscbeerservice.domain.Beer;
 import springframework.msscbeerservice.repository.BeerRepository;
 import springframework.msscbeerservice.web.controller.NotFoundException;
-import springframework.msscbeerservice.web.mappers.BeerMapper;
+import springframework.msscbeerservice.web.mappers.BeerMapperDecorator;
 import springframework.msscbeerservice.web.model.BeerDto;
 import springframework.msscbeerservice.web.model.BeerPagedList;
 import springframework.msscbeerservice.web.model.BeerStyleEnum;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Function;
 
 @Component
 @RequiredArgsConstructor
 class BaseBeerService implements BeerService {
 	private final BeerRepository beerRepository;
-	private final BeerMapper beerMapper;
+	private final BeerMapperDecorator beerMapper;
 
 	@Override
-	public BeerDto getBeerById(UUID beerId) {
+	public BeerDto getBeerById(UUID beerId, Boolean showInventoryOnHand) {
+		Function<Beer, BeerDto> beerMapperFunction =
+				showInventoryOnHand ? beerMapper::beerToBeerDtoCheckInventory : beerMapper::beerToBeerDto;
 		return beerRepository.findById(beerId)
-				.map(beerMapper::beerToBeerDto)
-				.orElseThrow(NotFoundException::new);
+		                     .map(beerMapperFunction)
+		                     .orElseThrow(NotFoundException::new);
 	}
 
 	@Override
@@ -46,7 +49,8 @@ class BaseBeerService implements BeerService {
 
 
 	@Override
-	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest of) {
+	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest of,
+			Boolean showInventoryOnHand) {
 		Page<Beer> beerPage;
 		if (!StringUtils.isEmpty(beerName) && Objects.nonNull(beerStyle)) {
 			beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, of);
@@ -57,10 +61,11 @@ class BaseBeerService implements BeerService {
 		} else {
 			beerPage = beerRepository.findAllByBeerName(beerName, of);
 		}
-
+		Function<Beer, BeerDto> beerMapperFunction =
+				showInventoryOnHand ? beerMapper::beerToBeerDtoCheckInventory : beerMapper::beerToBeerDto;
 		return new BeerPagedList(beerPage.getContent()
 		                                 .stream()
-		                                 .map(beerMapper::beerToBeerDto)
+		                                 .map(beerMapperFunction)
 		                                 .toList(), PageRequest.of(beerPage.getPageable()
 		                                                                   .getPageNumber(), beerPage.getPageable()
 		                                                                                             .getPageSize()),

@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
@@ -54,14 +55,14 @@ class BeerControllerTest {
 		// given
 
 		// when
-		when(beerService.getBeerById(any())).thenReturn(beerDto);
+		when(beerService.getBeerById(any(), anyBoolean())).thenReturn(beerDto);
 
 		// then
 		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID()).accept(APPLICATION_JSON))
 				.andExpect(status().isOk());
 
 		then(beerService).should()
-				.getBeerById(any());
+		                 .getBeerById(any(), anyBoolean());
 	}
 
 	@Test

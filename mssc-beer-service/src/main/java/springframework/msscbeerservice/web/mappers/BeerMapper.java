@@ -24,7 +24,7 @@ public abstract class BeerMapper {
 	)
 	@Mapping(
 			target = "quantityToBrew",
-			source = "quantityOnHand"
+			ignore = true
 	)
 	public abstract Beer beerDtoToBeer(BeerDto beerDto);
 
