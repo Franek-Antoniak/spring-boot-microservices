@@ -22,4 +22,5 @@ public class BeerOrderLine extends BaseEntity {
 	private Integer orderQuantity = 0;
 	@Builder.Default
 	private Integer quantityAllocated = 0;
+	String upc;
 }

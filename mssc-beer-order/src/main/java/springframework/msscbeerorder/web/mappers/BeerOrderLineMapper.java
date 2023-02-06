@@ -8,10 +8,6 @@ import springframework.msscbeerorder.web.model.BeerOrderLineDto;
 @Mapper(uses = {DateMapper.class})
 public interface BeerOrderLineMapper {
 	@Mapping(
-			target = "upc",
-			ignore = true
-	)
-	@Mapping(
 			target = "beerName",
 			ignore = true
 	)
