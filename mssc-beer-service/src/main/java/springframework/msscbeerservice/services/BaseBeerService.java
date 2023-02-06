@@ -81,4 +81,18 @@ class BaseBeerService implements BeerService {
 		                                                                                             .getPageSize()),
 		                         beerPage.getTotalElements());
 	}
+
+	@Override
+	@Cacheable(
+			cacheNames = "beerUpcCache",
+			key = "#upc",
+			condition = "#showInventoryOnHand == false"
+	)
+	public BeerDto getBeerByUpc(String upc, Boolean showInventoryOnHand) {
+		Function<Beer, BeerDto> beerMapperFunction =
+				showInventoryOnHand ? beerMapper::beerToBeerDtoCheckInventory : beerMapper::beerToBeerDto;
+		return beerRepository.findByUpc(upc)
+		                     .map(beerMapperFunction)
+		                     .orElseThrow(NotFoundException::new);
+	}
 }
