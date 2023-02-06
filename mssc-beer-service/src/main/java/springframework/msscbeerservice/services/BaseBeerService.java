@@ -2,6 +2,7 @@ package springframework.msscbeerservice.services;
 
 import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,11 @@ class BaseBeerService implements BeerService {
 	private final BeerMapperDecorator beerMapper;
 
 	@Override
+	@Cacheable(
+			cacheNames = "beerCache",
+			key = "#beerId",
+			condition = "#showInventoryOnHand == false"
+	)
 	public BeerDto getBeerById(UUID beerId, Boolean showInventoryOnHand) {
 		Function<Beer, BeerDto> beerMapperFunction =
 				showInventoryOnHand ? beerMapper::beerToBeerDtoCheckInventory : beerMapper::beerToBeerDto;
@@ -48,6 +54,10 @@ class BaseBeerService implements BeerService {
 	}
 
 
+	@Cacheable(
+			cacheNames = "beerListCache",
+			condition = "#showInventoryOnHand == false"
+	)
 	@Override
 	public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest of,
 			Boolean showInventoryOnHand) {
