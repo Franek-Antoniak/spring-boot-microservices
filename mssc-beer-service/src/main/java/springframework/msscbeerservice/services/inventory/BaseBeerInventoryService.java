@@ -1,4 +1,4 @@
-package springframework.msscbeerservice.services;
+package springframework.msscbeerservice.services.inventory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class BeerInventoryServiceImpl implements BeerInventoryService {
+public class BaseBeerInventoryService implements BeerInventoryService {
 	private final String INVENTORY_PATH_V1 = "/api/v1/beer/{beerId}/inventory";
 	private final RestTemplate restTemplate;
 	private final String beerInventoryServiceHost;

@@ -1,4 +1,4 @@
-package springframework.msscbeerservice.services;
+package springframework.msscbeerservice.services.inventory;
 
 import java.util.UUID;
 

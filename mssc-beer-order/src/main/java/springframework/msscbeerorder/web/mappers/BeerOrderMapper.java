@@ -17,7 +17,7 @@ public interface BeerOrderMapper {
 
 	@Mapping(
 			target = "customerId",
-			ignore = true
+			source = "customer.id"
 	)
 	BeerOrderDto beerOrderToDto(BeerOrder beerOrder);
 
@@ -29,6 +29,10 @@ public interface BeerOrderMapper {
 					),
 					@Mapping(
 							target = "id",
+							ignore = true
+					),
+					@Mapping(
+							target = "orderStatus",
 							ignore = true
 					)
 			}

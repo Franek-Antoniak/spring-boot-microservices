@@ -1,24 +1,19 @@
-package springframework.msscbeerservice.services;
+package springframework.msscbeerclient.web.config;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-@Slf4j
+@Configuration
 @ConfigurationProperties(
 		prefix = "sf.brewery",
 		ignoreUnknownFields = false
 )
-@Configuration
-@RequiredArgsConstructor
-public class BeerInventoryServiceConfiguration {
-	@Setter
-	private String beerInventoryServiceHost;
+public class BreweryClientConfiguration {
+	@Setter private String apihost;
 
 	@Bean
 	public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
@@ -26,7 +21,7 @@ public class BeerInventoryServiceConfiguration {
 	}
 
 	@Bean
-	public String getBeerInventoryServiceHost() {
-		return beerInventoryServiceHost;
+	public String apihost() {
+		return apihost;
 	}
 }
