@@ -138,11 +138,13 @@ jobs:
           command: (cd ../mssc-brewery-bom ; mvn install)
       - run:
           name: Start server on localhost:8080
-          command: (cd ../mssc-beer ; ./mvnw spring-boot:run)
+          command: (cd ../mssc-beer ; mvn spring-boot:run)
           background: true
       - run:
           shell: /bin/sh
-          command: wget --retry-connrefused --waitretry=20 --read-timeout=20 --timeout=15 -t 10 http://localhost:8080
+          command: |
+           wget --retry-connrefused --waitretry=20 --read-timeout=20 --timeout=15 -t 10 http://localhost:8080
+           :
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
