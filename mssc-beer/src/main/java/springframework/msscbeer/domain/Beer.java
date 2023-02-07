@@ -1,12 +1,10 @@
 package springframework.msscbeer.domain;
 
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 import springframework.msscbeer.web.model.BeerStyleEnum;
 
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -28,7 +26,7 @@ public class Beer {
 	)
 	@Column(
 			length = 36,
-			columnDefinition = "varchar",
+			columnDefinition = "varchar(36)",
 			updatable = false,
 			nullable = false
 	)
@@ -43,6 +41,7 @@ public class Beer {
 	private String beerName;
 	@Enumerated(EnumType.STRING)
 	private BeerStyleEnum beerStyle;
+	@NaturalId
 	@Column(unique = true)
 	private String upc;
 	private BigDecimal price;

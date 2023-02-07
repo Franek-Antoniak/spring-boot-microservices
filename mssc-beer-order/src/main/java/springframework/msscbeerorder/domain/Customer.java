@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,9 +23,10 @@ import java.util.UUID;
 public class Customer extends BaseEntity {
 
 	private String customerName;
+	@Type(type = "org.hibernate.type.UUIDCharType")
 	@Column(
 			length = 36,
-			columnDefinition = "varchar"
+			columnDefinition = "varchar(36)"
 	)
 	private UUID apiKey;
 	@OneToMany(mappedBy = "customer")

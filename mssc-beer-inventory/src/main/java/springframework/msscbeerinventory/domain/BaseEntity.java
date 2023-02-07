@@ -33,7 +33,7 @@ public class BaseEntity {
 	@Type(type = "org.hibernate.type.UUIDCharType")
 	@Column(
 			length = 36,
-			columnDefinition = "varchar",
+			columnDefinition = "varchar(36)",
 			updatable = false,
 			nullable = false
 	)
