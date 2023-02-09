@@ -1,4 +1,4 @@
-package springframework.msscbeer.events;
+package springframework.common.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
