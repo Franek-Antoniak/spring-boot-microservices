@@ -9,6 +9,8 @@ import org.springframework.jms.support.converter.MessageType;
 
 @Configuration
 public class JmsConfig {
+	public static final String BREWING_REQUEST_QUEUE = "brewing-request";
+
 	// Serializing message using Jackson
 	@Bean
 	public MessageConverter jacksonJmsMessageConverter() {

@@ -1,10 +1,10 @@
 package springframework.msscbeer.events;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.SuperBuilder;
+import springframework.msscbeer.web.model.BeerDto;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
-@SuperBuilder
-public class NewInventoryEvent extends BeerEvent {}
+
+public class NewInventoryEvent extends BeerEvent {
+	public NewInventoryEvent(BeerDto beerDto) {
+		super(beerDto);
+	}
+}
