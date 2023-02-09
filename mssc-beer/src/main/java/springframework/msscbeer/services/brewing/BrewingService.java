@@ -1,4 +1,4 @@
-package springframework.msscbeer.services;
+package springframework.msscbeer.services.brewing;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
