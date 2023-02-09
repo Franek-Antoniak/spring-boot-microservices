@@ -26,7 +26,7 @@ public class BrewBeerListener {
 	public void listen(BrewBeerEvent brewBeerEvent) {
 		BeerDto beerDto = brewBeerEvent.getBeerDto();
 		Beer beer = beerRepository.findById(beerDto.getId())
-		                          .orElseThrow(() -> new NotFoundException("Beer not found"));
+		                          .orElseThrow(NotFoundException::new);
 		beerDto.setQuantityOnHand(beer.getQuantityToBrew());
 		NewInventoryEvent newInventoryEvent = new NewInventoryEvent(beerDto);
 
