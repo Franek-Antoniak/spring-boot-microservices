@@ -6,17 +6,20 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
+import org.springframework.stereotype.Service;
 import springframework.spring.state.machine.domain.Payment;
 import springframework.spring.state.machine.domain.PaymentEvent;
 import springframework.spring.state.machine.domain.PaymentState;
 import springframework.spring.state.machine.repository.PaymentRepository;
 
 @RequiredArgsConstructor
+@Service
 public class PaymentServiceImpl implements PaymentService {
 	public static final String PAYMENT_ID_HEADER = "payment_id";
 
 	private final PaymentRepository paymentRepository;
 	private final StateMachineFactory<PaymentState, PaymentEvent> stateMachineFactory;
+	private final PaymentStateChangeInterceptor paymentStateChangeInterceptor;
 
 	@Override
 	public Payment newPayment(Payment payment) {
@@ -27,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public StateMachine<PaymentState, PaymentEvent> preAuth(Long paymentId) {
 		StateMachine<PaymentState, PaymentEvent> sm = build(paymentId);
-		sendEvent(paymentId, sm, PaymentEvent.PRE_AUTHORIZE);
+		sendEvent(paymentId, sm, PaymentEvent.PRE_AUTH_APPROVED);
 		return sm;
 	}
 
@@ -60,6 +63,7 @@ public class PaymentServiceImpl implements PaymentService {
 		sm.stop();
 		sm.getStateMachineAccessor()
 		  .doWithAllRegions(sma -> {
+			  sma.addStateMachineInterceptor(paymentStateChangeInterceptor);
 			  sma.resetStateMachine(new DefaultStateMachineContext<>(payment.getState(), null, null, null));
 		  });
 		sm.start();
