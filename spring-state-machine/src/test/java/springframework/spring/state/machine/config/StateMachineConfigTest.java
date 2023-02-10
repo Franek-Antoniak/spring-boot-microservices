@@ -1,6 +1,6 @@
 package springframework.spring.state.machine.config;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.statemachine.StateMachine;
@@ -13,7 +13,7 @@ class StateMachineConfigTest {
 	@Autowired
 	StateMachineFactory<PaymentState, PaymentEvent> factory;
 
-	@Test
+	@RepeatedTest(10)
 	void testNewStateMachine() {
 		StateMachine<PaymentState, PaymentEvent> sm = factory.getStateMachine();
 		sm.start();

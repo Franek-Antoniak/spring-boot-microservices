@@ -30,11 +30,15 @@ class PaymentServiceImplTest {
 	void preAuth() {
 		Payment savedPayment = paymentService.newPayment(payment);
 
+		System.out.println("Should be NEW");
+		System.out.println(savedPayment);
+
 		paymentService.preAuth(savedPayment.getId());
 
 		Payment preAuthedPayment = paymentRepository.findById(savedPayment.getId())
 		                                            .orElseThrow();
 
+		System.out.println("Should be PRE_AUTH or PRE_AUTH_ERROR");
 		System.out.println(preAuthedPayment);
 	}
 }
