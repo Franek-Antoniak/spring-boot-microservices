@@ -2,8 +2,8 @@ package springframework.msscbeerorder.services;
 
 
 import org.springframework.data.domain.Pageable;
-import springframework.msscbeerorder.web.model.BeerOrderDto;
-import springframework.msscbeerorder.web.model.BeerOrderPagedList;
+import springframework.brewery.model.BeerOrderDto;
+import springframework.brewery.model.BeerOrderPagedList;
 
 import java.util.UUID;
 

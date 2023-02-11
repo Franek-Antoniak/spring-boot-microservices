@@ -25,4 +25,6 @@ public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<B
 		      .end(BeerOrderStatusEnum.ALLOCATION_EXCEPTION)
 		      .end(BeerOrderStatusEnum.PICKED_UP);
 	}
+
+
 }

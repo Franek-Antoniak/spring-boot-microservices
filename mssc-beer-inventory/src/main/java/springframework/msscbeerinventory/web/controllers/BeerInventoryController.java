@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import springframework.brewery.model.BeerInventoryDto;
 import springframework.msscbeerinventory.repositories.BeerInventoryRepository;
 import springframework.msscbeerinventory.web.mappers.BeerInventoryMapper;
-import springframework.msscbeerinventory.web.model.BeerInventoryDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,8 +28,8 @@ public class BeerInventoryController {
 		log.debug("Finding Inventory for beerId:" + beerId);
 
 		return beerInventoryRepository.findAllByBeerId(beerId)
-				.stream()
-				.map(beerInventoryMapper::beerInventoryToBeerInventoryDto)
-				.collect(Collectors.toList());
+		                              .stream()
+		                              .map(beerInventoryMapper::beerInventoryToBeerInventoryDto)
+		                              .collect(Collectors.toList());
 	}
 }

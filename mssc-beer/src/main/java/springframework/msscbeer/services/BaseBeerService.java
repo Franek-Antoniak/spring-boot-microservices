@@ -7,13 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import springframework.brewery.model.BeerDto;
+import springframework.brewery.model.BeerPagedList;
 import springframework.msscbeer.domain.Beer;
+import springframework.msscbeer.domain.BeerStyleEnum;
 import springframework.msscbeer.repository.BeerRepository;
 import springframework.msscbeer.web.controller.NotFoundException;
 import springframework.msscbeer.web.mappers.BeerMapperDecorator;
-import springframework.msscbeer.web.model.BeerDto;
-import springframework.msscbeer.web.model.BeerPagedList;
-import springframework.msscbeer.web.model.BeerStyleEnum;
 
 import java.util.Objects;
 import java.util.UUID;

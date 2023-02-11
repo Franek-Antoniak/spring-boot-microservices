@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-import springframework.common.events.NewInventoryEvent;
+import springframework.brewery.model.events.NewInventoryEvent;
 import springframework.msscbeerinventory.domain.BeerInventory;
 import springframework.msscbeerinventory.repositories.BeerInventoryRepository;
 

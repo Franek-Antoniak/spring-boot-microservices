@@ -1,6 +1,7 @@
 package springframework.msscbeerorder.services.beer;
 
-import springframework.msscbeerorder.web.model.BeerDto;
+
+import springframework.brewery.model.BeerDto;
 
 import java.util.UUID;
 

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import springframework.brewery.model.BeerDto;
 import springframework.msscbeer.domain.Beer;
-import springframework.msscbeer.web.model.BeerDto;
-import springframework.msscbeer.web.model.BeerStyleEnum;
+import springframework.msscbeer.domain.BeerStyleEnum;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -30,14 +30,14 @@ class BeerMapperTest {
 		beerDto = BeerDto.builder()
 		                 .id(UUID.randomUUID())
 		                 .beerName("Beer1")
-		                 .beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
-				.upc("123123123123L")
-				.price(BigDecimal.valueOf(12.99))
-				.quantityOnHand(200)
-				.createdDate(OffsetDateTime.now())
-				.lastModifiedDate(OffsetDateTime.now())
-				.version(1)
-				.build();
+		                 .beerStyle("PALE_ALE")
+		                 .upc("123123123123L")
+		                 .price(BigDecimal.valueOf(12.99))
+		                 .quantityOnHand(200)
+		                 .createdDate(OffsetDateTime.now())
+		                 .lastModifiedDate(OffsetDateTime.now())
+		                 .version(1)
+		                 .build();
 
 		beer = Beer.builder()
 				.id(beerDto.getId())
@@ -89,7 +89,8 @@ class BeerMapperTest {
 
 		assertEquals(expected.getId(), beer.getId());
 		assertEquals(expected.getBeerName(), beerDto.getBeerName());
-		assertEquals(expected.getBeerStyle(), beerDto.getBeerStyle());
+		assertEquals(expected.getBeerStyle()
+		                     .toString(), beerDto.getBeerStyle());
 		assertEquals(expected.getUpc(), beerDto.getUpc());
 		assertEquals(expected.getPrice(), beerDto.getPrice());
 		assertEquals(expected.getCreatedDate(), beer.getCreatedDate());

@@ -4,8 +4,8 @@ import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import springframework.brewery.model.BeerDto;
 import springframework.msscbeer.domain.Beer;
-import springframework.msscbeer.web.model.BeerDto;
 
 @Mapper
 @DecoratedWith(BeerMapperDecorator.class)

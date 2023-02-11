@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import springframework.brewery.model.BeerOrderDto;
+import springframework.brewery.model.BeerOrderPagedList;
 import springframework.msscbeerorder.services.BeerOrderService;
-import springframework.msscbeerorder.web.model.BeerOrderDto;
-import springframework.msscbeerorder.web.model.BeerOrderPagedList;
 
 import java.util.UUID;
 

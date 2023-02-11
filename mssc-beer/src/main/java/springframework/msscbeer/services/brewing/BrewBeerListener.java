@@ -6,12 +6,12 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import springframework.common.events.BrewBeerEvent;
-import springframework.common.events.NewInventoryEvent;
+import springframework.brewery.model.BeerDto;
+import springframework.brewery.model.events.BrewBeerEvent;
+import springframework.brewery.model.events.NewInventoryEvent;
 import springframework.msscbeer.domain.Beer;
 import springframework.msscbeer.repository.BeerRepository;
 import springframework.msscbeer.web.controller.NotFoundException;
-import springframework.msscbeer.web.model.BeerDto;
 
 import static springframework.msscbeer.config.JmsConfig.BREWING_REQUEST_QUEUE;
 import static springframework.msscbeer.config.JmsConfig.NEW_INVENTORY_QUEUE;

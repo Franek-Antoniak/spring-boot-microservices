@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import springframework.common.events.BrewBeerEvent;
+import springframework.brewery.model.events.BrewBeerEvent;
 import springframework.msscbeer.domain.Beer;
 import springframework.msscbeer.repository.BeerRepository;
 import springframework.msscbeer.services.inventory.BeerInventoryService;

@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import springframework.msscbeer.domain.Beer;
-import springframework.msscbeer.web.model.BeerStyleEnum;
+import springframework.msscbeer.domain.BeerStyleEnum;
 
 import java.util.Optional;
 import java.util.UUID;

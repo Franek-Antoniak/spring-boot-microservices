@@ -2,7 +2,6 @@ package springframework.msscbeer.domain;
 
 import lombok.*;
 import org.hibernate.annotations.*;
-import springframework.msscbeer.web.model.BeerStyleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
@@ -45,7 +44,6 @@ public class Beer {
 	@Column(unique = true)
 	private String upc;
 	private BigDecimal price;
-	//	private Currency currency;
 	private Integer quantityToBrew;
 	private Integer minOnHand;
 }

@@ -3,8 +3,8 @@ package springframework.msscbeerorder.web.mappers;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import springframework.brewery.model.BeerOrderLineDto;
 import springframework.msscbeerorder.domain.BeerOrderLine;
-import springframework.msscbeerorder.web.model.BeerOrderLineDto;
 
 @Mapper(uses = {DateMapper.class})
 @DecoratedWith(BeerOrderLineMapperDecorator.class)

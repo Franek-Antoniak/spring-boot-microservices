@@ -3,7 +3,7 @@ package springframework.msscbeerorder.services.beer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import springframework.msscbeerorder.web.model.BeerDto;
+import springframework.brewery.model.BeerDto;
 
 import java.util.UUID;
 

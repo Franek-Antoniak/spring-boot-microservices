@@ -3,9 +3,9 @@ package springframework.msscbeer.web.mappers;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import springframework.brewery.model.BeerDto;
 import springframework.msscbeer.domain.Beer;
 import springframework.msscbeer.services.inventory.BeerInventoryService;
-import springframework.msscbeer.web.model.BeerDto;
 
 @Setter(onMethod = @__(@Autowired))
 public abstract class BeerMapperDecorator extends BeerMapper {

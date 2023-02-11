@@ -5,10 +5,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springframework.brewery.model.BeerDto;
+import springframework.brewery.model.BeerPagedList;
+import springframework.msscbeer.domain.BeerStyleEnum;
 import springframework.msscbeer.services.BeerService;
-import springframework.msscbeer.web.model.BeerDto;
-import springframework.msscbeer.web.model.BeerPagedList;
-import springframework.msscbeer.web.model.BeerStyleEnum;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

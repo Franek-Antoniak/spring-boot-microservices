@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import springframework.msscbeer.domain.Beer;
+import springframework.msscbeer.domain.BeerStyleEnum;
 import springframework.msscbeer.repository.BeerRepository;
-import springframework.msscbeer.web.model.BeerStyleEnum;
 
 import java.math.BigDecimal;
 

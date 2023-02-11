@@ -2,10 +2,10 @@ package springframework.msscbeerorder.web.mappers;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import springframework.brewery.model.BeerDto;
+import springframework.brewery.model.BeerOrderLineDto;
 import springframework.msscbeerorder.domain.BeerOrderLine;
 import springframework.msscbeerorder.services.beer.BeerService;
-import springframework.msscbeerorder.web.model.BeerDto;
-import springframework.msscbeerorder.web.model.BeerOrderLineDto;
 
 @Setter(onMethod = @__(@Autowired))
 public abstract class BeerOrderLineMapperDecorator implements BeerOrderLineMapper {

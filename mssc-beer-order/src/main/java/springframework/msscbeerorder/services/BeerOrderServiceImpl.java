@@ -8,14 +8,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springframework.brewery.model.BeerOrderDto;
+import springframework.brewery.model.BeerOrderPagedList;
 import springframework.msscbeerorder.domain.BeerOrder;
 import springframework.msscbeerorder.domain.BeerOrderStatusEnum;
 import springframework.msscbeerorder.domain.Customer;
 import springframework.msscbeerorder.repositories.BeerOrderRepository;
 import springframework.msscbeerorder.repositories.CustomerRepository;
 import springframework.msscbeerorder.web.mappers.BeerOrderMapper;
-import springframework.msscbeerorder.web.model.BeerOrderDto;
-import springframework.msscbeerorder.web.model.BeerOrderPagedList;
 
 import java.util.UUID;
 import java.util.stream.Collectors;

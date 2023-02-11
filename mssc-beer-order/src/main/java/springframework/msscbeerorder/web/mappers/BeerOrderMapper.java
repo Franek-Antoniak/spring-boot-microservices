@@ -3,8 +3,8 @@ package springframework.msscbeerorder.web.mappers;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import springframework.brewery.model.BeerOrderDto;
 import springframework.msscbeerorder.domain.BeerOrder;
-import springframework.msscbeerorder.web.model.BeerOrderDto;
 
 
 @Mapper(

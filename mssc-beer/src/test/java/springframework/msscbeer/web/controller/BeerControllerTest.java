@@ -9,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import springframework.brewery.model.BeerDto;
 import springframework.msscbeer.services.BeerService;
-import springframework.msscbeer.web.model.BeerDto;
-import springframework.msscbeer.web.model.BeerStyleEnum;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -42,12 +41,12 @@ class BeerControllerTest {
 	@BeforeEach
 	void setUp() {
 		beerDto = BeerDto.builder()
-				.beerName("My Beer")
-				.beerStyle(BeerStyleEnum.valueOf("PALE_ALE"))
-				.upc("123123123123L")
-				.quantityOnHand(200)
-				.price(BigDecimal.valueOf(12.99))
-				.build();
+		                 .beerName("My Beer")
+		                 .beerStyle("PALE_ALE")
+		                 .upc("123123123123L")
+		                 .quantityOnHand(200)
+		                 .price(BigDecimal.valueOf(12.99))
+		                 .build();
 	}
 
 	@Test

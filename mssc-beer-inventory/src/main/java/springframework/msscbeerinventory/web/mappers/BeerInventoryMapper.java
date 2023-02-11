@@ -2,8 +2,8 @@ package springframework.msscbeerinventory.web.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import springframework.brewery.model.BeerInventoryDto;
 import springframework.msscbeerinventory.domain.BeerInventory;
-import springframework.msscbeerinventory.web.model.BeerInventoryDto;
 
 
 @Mapper(uses = {DateMapper.class})
