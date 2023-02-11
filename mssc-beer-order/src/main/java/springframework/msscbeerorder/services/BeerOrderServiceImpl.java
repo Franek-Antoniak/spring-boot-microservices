@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springframework.msscbeerorder.domain.BeerOrder;
+import springframework.msscbeerorder.domain.BeerOrderStatusEnum;
 import springframework.msscbeerorder.domain.Customer;
-import springframework.msscbeerorder.domain.OrderStatusEnum;
 import springframework.msscbeerorder.repositories.BeerOrderRepository;
 import springframework.msscbeerorder.repositories.CustomerRepository;
 import springframework.msscbeerorder.web.mappers.BeerOrderMapper;
@@ -72,7 +72,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
 	@Transactional
 	public void pickupOrder(UUID customerId, UUID orderId) {
 		BeerOrder beerOrder = getOrder(customerId, orderId);
-		beerOrder.setOrderStatus(OrderStatusEnum.PICKED_UP);
+		beerOrder.setOrderStatus(BeerOrderStatusEnum.PICKED_UP);
 		beerOrderRepository.save(beerOrder);
 	}
 

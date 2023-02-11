@@ -29,6 +29,6 @@ public class BeerOrder extends BaseEntity {
 	@Fetch(FetchMode.JOIN)
 	private Set<BeerOrderLine> beerOrderLines;
 	@Builder.Default
-	private OrderStatusEnum orderStatus = OrderStatusEnum.NEW;
+	private BeerOrderStatusEnum orderStatus = BeerOrderStatusEnum.NEW;
 	private String orderStatusCallbackUrl;
 }
