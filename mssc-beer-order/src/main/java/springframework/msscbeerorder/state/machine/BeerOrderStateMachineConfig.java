@@ -12,6 +12,7 @@ import springframework.msscbeerorder.domain.BeerOrderStatusEnum;
 
 import java.util.EnumSet;
 
+import static springframework.msscbeerorder.domain.BeerOrderEventEnum.VALIDATE_ORDER;
 import static springframework.msscbeerorder.domain.BeerOrderStatusEnum.*;
 
 @Configuration
@@ -20,6 +21,7 @@ import static springframework.msscbeerorder.domain.BeerOrderStatusEnum.*;
 public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<BeerOrderStatusEnum,
 		BeerOrderEventEnum> {
 	private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderAction;
+	private final Action<BeerOrderStatusEnum, BeerOrderEventEnum> validateOrderRequest;
 
 	@Override
 	public void configure(
@@ -40,7 +42,7 @@ public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<B
 		transitions.withExternal()
 		           .source(NEW)
 		           .target(VALIDATION_PENDING)
-		           .event(BeerOrderEventEnum.VALIDATE_ORDER)
+		           .event(VALIDATE_ORDER)
 		           .action(validateOrderAction)
 		           .and()
 		           .withExternal()
@@ -52,7 +54,12 @@ public class BeerOrderStateMachineConfig extends StateMachineConfigurerAdapter<B
 		           .source(NEW)
 		           .target(VALIDATION_EXCEPTION)
 		           .event(BeerOrderEventEnum.VALIDATION_FAILED)
-		           .and();
+		           .and()
+		           .withExternal()
+		           .source(VALIDATED)
+		           .target(ALLOCATION_PENDING)
+		           .event(VALIDATE_ORDER)
+		           .action(validateOrderRequest);
 	}
 
 }

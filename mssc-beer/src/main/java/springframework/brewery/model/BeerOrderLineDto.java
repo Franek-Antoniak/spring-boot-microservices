@@ -1,61 +1,45 @@
-package springframework.brewery.model.brewery.model;
+package springframework.brewery.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
-import java.io.Serial;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BeerDto implements Serializable {
-	@Serial
-	private static final long serialVersionUID = -2287110524734738390L;
-
-	@Null
+@Builder
+public class BeerOrderLineDto {
+	@JsonProperty("id")
 	private UUID id;
 
-	@Null
+	@JsonProperty("version")
 	private Integer version;
 
-	@Null
 	@JsonFormat(
 			pattern = "yyyy-MM-dd'T'HH:mm:ssZ",
 			shape = JsonFormat.Shape.STRING
 	)
+	@JsonProperty("createdDate")
 	private OffsetDateTime createdDate;
 
-	@Null
 	@JsonFormat(
 			pattern = "yyyy-MM-dd'T'HH:mm:ssZ",
 			shape = JsonFormat.Shape.STRING
 	)
+	@JsonProperty("lastModifiedDate")
 	private OffsetDateTime lastModifiedDate;
-
-	@NotBlank
-	private String beerName;
-
-	@NotNull
-	private String beerStyle;
-
-	@NotNull
 	private String upc;
-
-	@Positive
-	@NotNull
-	@JsonFormat(shape = JsonFormat.Shape.STRING)
+	private String beerName;
+	private String beerStyle;
+	private UUID beerId;
+	@Builder.Default
+	private Integer orderQuantity = 0;
 	private BigDecimal price;
-
-	@NotNull
-	@PositiveOrZero
-	private Integer quantityOnHand;
 }
